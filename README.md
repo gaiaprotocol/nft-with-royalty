@@ -1,1 +1,1 @@
-# nft-with-royalty
+# Self-tradable NFT
