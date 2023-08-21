@@ -20,7 +20,7 @@ abstract contract TokenMetadata is ERC721, CreatorControl {
     }
 
     function setBaseURI(string memory baseURI) public onlyCreator {
-        __baseURI = __baseURI;
+        __baseURI = baseURI;
         emit SetBaseURI(baseURI);
     }
 
