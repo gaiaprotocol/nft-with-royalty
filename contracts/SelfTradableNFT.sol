@@ -55,7 +55,7 @@ contract SelfTradableNFT is CollectionMetadata, CreatorMintable, Royalty, Reentr
     }
 
     function _beforeTokenTransfer(address from, address to, uint256 tokenId, uint256 batchSize) internal override {
-        if (_isSelfTradableNFT) {
+        if (!from.isContract() && _isSelfTradableNFT) {
             require(!msg.sender.isContract(), "SelfTradableNFT: token sender cannot be a contract");
             require(!to.isContract(), "SelfTradableNFT: token recipient cannot be a contract");
         }
