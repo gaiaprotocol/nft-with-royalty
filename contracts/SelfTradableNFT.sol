@@ -54,6 +54,16 @@ contract SelfTradableNFT is CollectionMetadata, CreatorMintable, Royalty, Reentr
         emit SetSelfTradableNFT(isSelfTradableNFT);
     }
 
+    function approve(address to, uint256 tokenId) public virtual override {
+        require(!_isSelfTradableNFT, "SelfTradableNFT: approve is disabled");
+        super.approve(to, tokenId);
+    }
+
+    function setApprovalForAll(address operator, bool approved) public virtual override {
+        require(!_isSelfTradableNFT, "SelfTradableNFT: setApprovalForAll is disabled");
+        super.setApprovalForAll(operator, approved);
+    }
+
     function _beforeTokenTransfer(address from, address to, uint256 tokenId, uint256 batchSize) internal override {
         if (!from.isContract() && _isSelfTradableNFT) {
             require(!msg.sender.isContract(), "SelfTradableNFT: token sender cannot be a contract");
